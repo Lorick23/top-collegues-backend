@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-TopColleguesBackApp<top-collegues-back>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "dev.top.TopColleguesBackApp",
+            "projectName": "top-collegues-back",
+            "args": ""
+        }
+    ]
+}
