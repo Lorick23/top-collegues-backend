@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import dev.top.utils.CollegueAPI;
+
 @Entity
 public class Collegue {
 
@@ -28,6 +30,11 @@ public class Collegue {
         this.score = score;
     }
 
+    public Collegue(CollegueAPI colapi) {
+        this.name = colapi.getNom();
+        this.photoUrl = colapi.getPhoto();
+        this.score = 0;
+    }
 
     public Long getId() {
         return this.id;

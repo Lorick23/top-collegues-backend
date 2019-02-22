@@ -14,8 +14,14 @@ public class CollegueService{
     @Autowired
     CollegueRepo collegueRepo;
 
+    
+
     public List<Collegue> findAll(){
         return collegueRepo.findAll();
+    }
+
+    public Collegue save(Collegue collegue){
+        return collegueRepo.save(collegue);
     }
 
     public Collegue updateScore(String name, Avis avis){
