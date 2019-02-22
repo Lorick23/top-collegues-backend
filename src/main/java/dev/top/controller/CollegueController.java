@@ -1,9 +1,7 @@
 package dev.top.controller;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +32,6 @@ public class CollegueController {
 
     @GetMapping
     public ResponseEntity<List<Collegue>> findAll() {
-        //ResponseEntity.ok().body(collegueService.findAll());
         return ResponseEntity.status(HttpStatus.OK).body(collegueService.findAll());
     }
 
@@ -45,7 +42,10 @@ public class CollegueController {
 
     @PostMapping
     public ResponseEntity<?> postMethodName(@Valid @RequestBody CollegueFront colFront, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
+        if (collegueService.findByMatricule(colFront.getMatricule()) != null) {
             return ResponseEntity.badRequest().build();
         }
         RestTemplate restTemplate = new RestTemplate();
@@ -54,23 +54,13 @@ public class CollegueController {
         if (response != null) {
             CollegueAPI colapi = response.getBody()[0];
             colapi.setNom(colFront.getPseudo());
-            if(colFront.getPhoto() != null){
+            if ((colFront.getPhoto() != null) && !(colFront.getPhoto().equals(""))) {
                 colapi.setPhoto(colFront.getPhoto());
             }
-            Collegue col = new Collegue(colapi);
-            this.collegueService.save(col);
+            this.collegueService.save(new Collegue(colapi));
             return ResponseEntity.ok().build();
-        }else{
+        } else {
             return ResponseEntity.badRequest().build();
         }
     }
-
-    // @PostMapping
-    // public void postMethodName(@RequestBody String matricule) {
-    //     RestTemplate restTemplate = new RestTemplate();
-    //     String fooResourceUrl = "https://tommy-sjava.cleverapps.io/collegues?matricule=" + matricule;
-    //     ResponseEntity<CollegueAPI[]> response = restTemplate.getForEntity(fooResourceUrl, CollegueAPI[].class);
-    // }
-    
-
 }

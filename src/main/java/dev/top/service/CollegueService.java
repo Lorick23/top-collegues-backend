@@ -20,6 +20,10 @@ public class CollegueService{
         return collegueRepo.findAll();
     }
 
+    public Collegue findByMatricule(String matricule){
+        return collegueRepo.findByMatricule(matricule);
+    }
+
     public Collegue save(Collegue collegue){
         return collegueRepo.save(collegue);
     }

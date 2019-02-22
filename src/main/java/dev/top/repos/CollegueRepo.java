@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface CollegueRepo extends JpaRepository<Collegue, Integer> {
 
     public Collegue findByName(String name);
+    public Collegue findByMatricule(String matricule);
 }

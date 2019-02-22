@@ -20,6 +20,8 @@ public class Collegue {
     private String photoUrl;
     @Column
     private int score;
+    @Column
+    private String matricule;
 
     public Collegue() {
     }
@@ -34,6 +36,7 @@ public class Collegue {
         this.name = colapi.getNom();
         this.photoUrl = colapi.getPhoto();
         this.score = 0;
+        this.matricule = colapi.getMatricule();
     }
 
     public Long getId() {
@@ -63,5 +66,11 @@ public class Collegue {
     public void setScore(int score) {
         this.score = score;
     }
+
+
+    public String getMatricule() {
+        return this.matricule;
+    }
+
 
 }
